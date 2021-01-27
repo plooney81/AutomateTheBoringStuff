@@ -52,9 +52,21 @@ import re
 # print(mo_anotherNumb2.group())
 
 # #? Matching zero or more w/ *
-anotherBatRegex = re.compile(r'Bat(wo)*man')
-sentencess = ['The adventures of Batman', 'The adventures of Batwoman', 'The adventures of Batwowowowoman']
-for sentence in sentencess:
-    print(sentence)
-    mo = anotherBatRegex.search(sentence)
-    print(mo.group())
+# anotherBatRegex = re.compile(r'Bat(wo)*man')
+# sentencess = ['The adventures of Batman', 'The adventures of Batwoman', 'The adventures of Batwowowowoman']
+# for sentence in sentencess:
+#     print(sentence)
+#     mo = anotherBatRegex.search(sentence)
+#     print(mo.group())
+
+# #? Matching one or more with the +
+# #* Not option, must appear at least once
+oneMoreTimeRegex = re.compile(r'Bat(wo)+man')
+moBlah = oneMoreTimeRegex.search('The adventures of Batwoman')
+print(moBlah.group())
+
+moBlah1 = oneMoreTimeRegex.search('The adventures of Batwowowoman')
+print(moBlah1.group())
+
+moBlah2 = oneMoreTimeRegex.search('The adventures of Batman')
+print(moBlah2 == None)
