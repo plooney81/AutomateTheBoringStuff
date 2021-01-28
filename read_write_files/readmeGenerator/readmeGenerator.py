@@ -89,6 +89,53 @@ def getReadmeIcons(listOfKeys, languagesOrFrameworks):
         returnString += readMeIcons[languagesOrFrameworks][key]
     return returnString
 
+# todo ask for contributor information
+# todo including, GitHub and LinkedIn url's for each contributor
+#? getContributors Function
+#* asks if they would like to add a user
+#* if yes, add user name, github link, linkedIn link
+#* if no, exit
+def getContributors():
+    possibleSocial = list(readMeIcons['Social'].keys())
+    contributors = []
+    while True:
+        print(f'\nAdd a contributor to the project? Y or N')
+        userInput = input('\n> ')
+        if userInput.lower() == 'y':
+            newContributor = {}
+            name = input(f'\nContributor name:\n> ').title()
+            for social in possibleSocial:
+                link = input(f'\nEnter link to {name}\'s {social} profile\n> ')
+                if link != '':
+                    newContributor[social] = link
+            newContributor['name'] = name
+            contributors.append(newContributor)
+        elif userInput.lower() == 'n':
+            return contributors
+        else:
+            print('Whoops not an option')
+
+def getContributorIcons(contributors):
+    returnString = ''
+    for contributor in contributors:
+        contributorString = ''
+        contributorString += f"* {contributor['name']} "
+        for key in contributor:
+            if key != 'name' and (key in readMeIcons['Social']):
+                contributorString += f"<a href='{contributor[key]}'>"
+                contributorString += readMeIcons['Social'][key]
+                contributorString += "</a>"
+        returnString += contributorString + '\n'
+    return returnString
+
+
+# todo get a brief project description
+#? getDescription Function
+#* asks user for a general description of the project
+
+# todo get stretch goals information
+#? getStretchGoals Function
+#* asks user if they have any stretch goals
 
 p = getPathAndCheck()
 title = getTitle(p.stem.title())
@@ -96,6 +143,8 @@ languages = getLanguages()
 frameworks = getFrameworks()
 languagesReadmeIcons = getReadmeIcons(languages, 'Programming Languages')
 frameworksReadmeIcons = getReadmeIcons(frameworks, 'Frameworks')
+contributors = getContributors()
+print(getContributorIcons(contributors))
 
 
 # readmeFile = open(p / f'{p.stem}_generated_README.md', 'w')

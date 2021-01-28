@@ -61,5 +61,9 @@ readMeIcons = {
         'TypeGraphQL': '<img alt="Type-graphql" src="https://img.shields.io/badge/-TypeGraphQL-%23C04392?&style=for-the-badge"/>',
         'Ant Design': '<img alt="Ant-Design" src="https://img.shields.io/badge/-Ant%20Design-%230170FE?&style=for-the-badge&logo=ant-design&logoColor=white"/>',
         'Apollo GraphQL': '<img alt="Apollo-GraphQL" src="https://img.shields.io/badge/-Apollo%20GraphQL-311C87?style=for-the-badge&logo=apollo-graphql"/>'
+    },
+    'Social': {
+        'GitHub': '<img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/>',
+        'LinkedIn': '<img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/>'
     }
 }
