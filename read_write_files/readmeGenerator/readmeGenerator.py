@@ -2,6 +2,7 @@
 import pyinputplus as pyip
 from pathlib import Path
 from readmeIcons import readMeIcons
+from readmeTemplate import toc
 
 #? Creates a readme file for a user in a specified position
 
@@ -129,13 +130,37 @@ def getContributorIcons(contributors):
     return returnString
 
 
-# todo get a brief project description
 #? getDescription Function
 #* asks user for a general description of the project
+def getDescription(title):
+    starterString = """## **General**\n- """
+    userInput = input(f'Breifly describe {title}:\n> ')
+    return starterString + userInput
 
-# todo get stretch goals information
 #? getStretchGoals Function
 #* asks user if they have any stretch goals
+def getStretchGoals():
+    stretchGoals = []
+    while True:
+        print(f'\nAdd a stretch goal? Y or N')
+        userInput = input('\n> ')
+        if userInput.lower() == 'y':
+            goal = input(f'\nEnter stretch goal:\n> ').title()
+            stretchGoals.append(goal)
+        elif userInput.lower() == 'n':
+            return stretchGoals
+        else:
+            print('Whoops not an option')
+
+#? getStretchGoalString
+#* makes a call to ask the user if they have any stretch goals
+#* then it just returns the goals in the way they are supposed to be formatted
+def returnStretchGoalString():
+    goals = getStretchGoals()
+    if len(goals) == 0: return ''
+    starterString = """## **Stretch Goals**"""
+    for goal in goals: starterString += f'\n* {goal}'
+    return starterString
 
 p = getPathAndCheck()
 title = getTitle(p.stem.title())
@@ -143,57 +168,23 @@ languages = getLanguages()
 frameworks = getFrameworks()
 languagesReadmeIcons = getReadmeIcons(languages, 'Programming Languages')
 frameworksReadmeIcons = getReadmeIcons(frameworks, 'Frameworks')
-contributors = getContributors()
-print(getContributorIcons(contributors))
+contributorIcons = getContributorIcons(getContributors())
+description = getDescription(title)
+stretchGoals = returnStretchGoalString()
 
 
-# readmeFile = open(p / f'{p.stem}_generated_README.md', 'w')
-
-
-
-
-
-
-# template = f"""
-# ### {title}
-# - [**General**](#general)
-#   - [Technology and Frameworks Used:](#technology-and-frameworks-used)
-#   - [Project Contributors:](#project-contributors)
-# - [How To Use:](#how-to-use)
-#   - [Signup/Login](#signuplogin)
-#   - [Navigating the ___ Feature](#navigating-the-___-feature)
-#   - [Using the ___ feature](#using-the-___-feature)
-
-# <hr>
-
-# ## **General**
-# - {generalAboutText}
-# <!--  -->
-
-# ### Technology and Frameworks Used:
-
-# <div>
-#     <h2>Languages Used</h2>
-#     {languagesText}
-# </div>
-# <div>
-#     <h2>Frameworks & Additional Technologies Used</h2>
-#     {frameworksText}
-# </div>
-  
-
-# ### Project Contributors:
-# * Peter Looney <a href='https://github.com/plooney81'>
-#                   <img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/>
-#                 </a>
-#                 <a href='https://www.linkedin.com/in/peter-looney-27b732166/'>
-#                   <img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/>
-#                 </a>
-# <!-- * Insert project contributors -->
-# {projectContributorsText}
-
-# <hr>
-
+readmeFile = open(p / f'{p.stem}_generated_README.md', 'w')
+readmeFile.write(f'# {title} <!-- omit in TOC -->')
+readmeFile.write(f'\n{toc}')
+readmeFile.write('\n<hr>\n')
+readmeFile.write(f'\n{description}\n')
+readmeFile.write(f'\n{description}\n')
+readmeFile.write(f'\n### Technology and Frameworks Used\n')
+readmeFile.write(f'\n<div><h2>Languages Used</h2>\n{languagesReadmeIcons}\n</div>')
+readmeFile.write(f'\n<div><h2>Frameworks Used</h2>\n{frameworksReadmeIcons}\n</div>')
+readmeFile.write(f'\n\n### Project Contributors:\n{contributorIcons}\n\n<hr>')
+readmeFile.write(f'\n\n{stretchGoals}')
+readmeFile.close()
 
 # ## How To Use:
 

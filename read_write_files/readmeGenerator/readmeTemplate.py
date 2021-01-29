@@ -1,5 +1,4 @@
-template = f"""
-### {title}
+toc = """
 - [**General**](#general)
   - [Technology and Frameworks Used:](#technology-and-frameworks-used)
   - [Project Contributors:](#project-contributors)
@@ -7,6 +6,22 @@ template = f"""
   - [Signup/Login](#signuplogin)
   - [Navigating the ___ Feature](#navigating-the-___-feature)
   - [Using the ___ feature](#using-the-___-feature)
+  - [Lessons Learned](#lessons-learned)
+  - [Stretch Goals](#stretch-goals)
+"""
+
+
+template = """
+# {title} <!-- omit in TOC -->
+- [**General**](#general)
+  - [Technology and Frameworks Used:](#technology-and-frameworks-used)
+  - [Project Contributors:](#project-contributors)
+- [How To Use:](#how-to-use)
+  - [Signup/Login](#signuplogin)
+  - [Navigating the ___ Feature](#navigating-the-___-feature)
+  - [Using the ___ feature](#using-the-___-feature)
+  - [Lessons Learned](#lessons-learned)
+  - [Stretch Goals](#stretch-goals)
 
 <hr>
 
@@ -49,4 +64,9 @@ template = f"""
 
 ### Using the ___ feature
    
+### Lessons Learned
+* I learned blah
+  
+### Stretch Goals
+* I want to blah
 """
