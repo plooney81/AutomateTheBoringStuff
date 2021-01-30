@@ -90,8 +90,6 @@ def getReadmeIcons(listOfKeys, languagesOrFrameworks):
         returnString += readMeIcons[languagesOrFrameworks][key]
     return returnString
 
-# todo ask for contributor information
-# todo including, GitHub and LinkedIn url's for each contributor
 #? getContributors Function
 #* asks if they would like to add a user
 #* if yes, add user name, github link, linkedIn link
@@ -129,11 +127,12 @@ def getContributorIcons(contributors):
         returnString += contributorString + '\n'
     return returnString
 
-
 #? getDescription Function
 #* asks user for a general description of the project
-def getDescription(title):
-    starterString = """## **General**\n- """
+def getDescription(title, generalOrFeature):
+    starterString = f"""## **{generalOrFeature.title()}**\n- """
+    if generalOrFeature == 'feature':
+        starterString = '#' + starterString
     userInput = input(f'Breifly describe {title}:\n> ')
     return starterString + userInput
 
@@ -162,6 +161,12 @@ def returnStretchGoalString():
     for goal in goals: starterString += f'\n* {goal}'
     return starterString
 
+#? getFeatures
+#* asks the user if they would like to add a feature
+def getFeatures():
+    pass
+
+
 p = getPathAndCheck()
 title = getTitle(p.stem.title())
 languages = getLanguages()
@@ -169,7 +174,7 @@ frameworks = getFrameworks()
 languagesReadmeIcons = getReadmeIcons(languages, 'Programming Languages')
 frameworksReadmeIcons = getReadmeIcons(frameworks, 'Frameworks')
 contributorIcons = getContributorIcons(getContributors())
-description = getDescription(title)
+description = getDescription(title, 'general')
 stretchGoals = returnStretchGoalString()
 
 
